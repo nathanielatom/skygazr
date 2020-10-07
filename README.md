@@ -1,6 +1,6 @@
 # Skygazr
 
-Locate celestial objects in the sky. 
+Locate celestial objects in the sky by name. 
 
 # Installation
 
@@ -16,5 +16,18 @@ pip install skyfield pandas beautifulsoup4 wikipedia
 
 Example: ./skygazr.py --time "2020-10-03T00:35:20.381" --body "Betelgeuse"
 
-If it's a planet or star in the Hipparcos Catalogue, will also show relative speed and distance.
+If it's a planet or star in the Hipparcos Catalogue, will also show relative 
+speed and distance. Constellations are unsupported.
+
+Fun targets: 
+
+```
+"Betelgeuse"
+"61 Cygni"
+"Sagittarius A"
+"Messier 87"
+"Andromeda"
+"Mars"
+"Jupiter Barycenter"
+```
 
