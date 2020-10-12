@@ -51,7 +51,7 @@ parser.add_argument('-e', '--elevation', type=float, default=100, help='Elevatio
 parser.add_argument('-t', '--time', '--at', type=str, default='now', help='Observation timestamp, in ISO 8601 format. Default is not the past, which is history, nor the future, which is a mystery, but a gift, and thus, the present.')
 parser.add_argument('-z', '--timezone', type=str, default='local', help='timezone; TODO: implement')
 parser.add_argument('-b', '--target', '--body', type=str, default='mars', help='Target celestial body to locate in the sky!')
-parser.add_argument('--summary', type=bool, action='store_true', default=False)
+parser.add_argument('--summary', action='store_true', default=False)
 args = parser.parse_args()
 
 # import after argparse for faster CLI
