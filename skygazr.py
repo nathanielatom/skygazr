@@ -43,6 +43,7 @@ Out[37]: <EarthSatellite ISS (ZARYA) catalog #25544 epoch 2020-09-19 20:33:04 UT
 """
 
 import argparse
+from pprint import pprint
 
 parser = argparse.ArgumentParser(description='Locate celestial objects in the sky.\nExample: ./skygazr.py --time "2020-10-03T00:35:20.381" --body "Betelgeuse"')
 parser.add_argument('-s', '--space', '--latlong', nargs=2, type=float, default=(43.660444, -79.398556), help='Spatial coordinates of observation, given as two floating point values in degrees for latitude and longitude on the surface of Earth. Default is the Burton Tower, University of Toronto Physics Library, Toronto, Ontario, Canada (since, naturally, Toronto is the center of the universe ;).')
@@ -50,6 +51,7 @@ parser.add_argument('-e', '--elevation', type=float, default=100, help='Elevatio
 parser.add_argument('-t', '--time', '--at', type=str, default='now', help='Observation timestamp, in ISO 8601 format. Default is not the past, which is history, nor the future, which is a mystery, but a gift, and thus, the present.')
 parser.add_argument('-z', '--timezone', type=str, default='local', help='timezone; TODO: implement')
 parser.add_argument('-b', '--target', '--body', type=str, default='mars', help='Target celestial body to locate in the sky!')
+parser.add_argument('--summary', type=bool, action='store_true', default=False)
 args = parser.parse_args()
 
 # import after argparse for faster CLI
@@ -79,6 +81,8 @@ def info_from_name_using_wikipedia(name):
     hips = {}
     ra_hours, ra_degs, decs = {}, {}, {}
     page = wikipedia.page(name)
+    if summary:
+        pprint(page.summary)
     soup = BeautifulSoup(page.html(), 'html.parser')
     table = soup.find('table', class_='infobox')
     entries = table.find_all('a', text='HIP')
@@ -108,6 +112,7 @@ def single_body(name):
     return pick_body(hips), pick_body(ra_hours), pick_body(ra_degs), pick_body(decs)
 
 if __name__ == '__main__':
+    summary = args.summary
     stringy_body = args.target
     planets = load('de421.bsp')
     earth = planets['earth']
